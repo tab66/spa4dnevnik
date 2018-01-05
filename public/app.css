@@ -1,0 +1,180 @@
+body {
+  margin: 0;
+  font-family: "Roboto", Arial, Helvetica, sans-serif; }
+
+.container {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto; }
+
+.topbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  padding: 10px 0;
+  background: #ececec;
+  z-index: 5; }
+  .topbar .container {
+    display: flex;
+    justify-content: space-between; }
+  .topbar__logo-wrapper {
+    height: 38px;
+    display: flex;
+    align-items: center; }
+  .topbar__image-wrapper, .topbar__image {
+    height: 100%; }
+  .topbar__image-wrapper {
+    margin-right: 15px; }
+  .topbar__logo-text {
+    font-size: 18px;
+    font-weight: 500;
+    color: #757575; }
+  .topbar__input-wrapper {
+    width: 440px;
+    position: relative; }
+  .topbar__input {
+    width: 100%;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    color: #757575;
+    padding: .5em;
+    border-radius: 2px;
+    border: 1px solid lightgray;
+    outline: none; }
+  .topbar__input-button {
+    position: absolute;
+    top: 5px;
+    right: -12px;
+    padding: 6px 15px;
+    background-color: #b5d0fa;
+    border: 0;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s all; }
+    .topbar__input-button:disabled {
+      background-color: #757575; }
+    .topbar__input-button:active, .topbar__input-button:focus {
+      outline: 0; }
+
+.content {
+  margin-top: 68px; }
+  .content__wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0 -15px; }
+
+.photo-tumblr__info-item--likes, .photo-tumblr__info-item--comments {
+  position: relative;
+  padding-left: 20px; }
+  .photo-tumblr__info-item--likes:before, .photo-tumblr__info-item--comments:before {
+    position: absolute;
+    font-family: "Material Icons";
+    top: 50%;
+    left: 0;
+    font-size: 16px;
+    transform: translate(-50%, -50%); }
+
+.photo-tumblr {
+  width: calc(2/10 * 100%);
+  height: 135px;
+  position: relative;
+  padding: 0 15px;
+  margin: 15px 0;
+  box-sizing: border-box;
+  cursor: pointer; }
+  .photo-tumblr img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; }
+  .photo-tumblr__info {
+    width: calc(100% - 30px);
+    height: 40px;
+    position: absolute;
+    bottom: 0;
+    background: rgba(235, 235, 235, 0.55);
+    display: flex;
+    justify-content: space-around;
+    align-items: center; }
+  .photo-tumblr__info-item--likes:before {
+    content: '\E87E'; }
+  .photo-tumblr__info-item--comments:before {
+    content: '\E0CB'; }
+
+.modal__button--prev, .modal__button--next, .modal__button--close {
+  position: absolute;
+  color: white;
+  background-color: transparent;
+  border: none;
+  cursor: pointer; }
+  .modal__button--prev .material-icons, .modal__button--next .material-icons, .modal__button--close .material-icons {
+    font-size: 50px; }
+  .modal__button--prev:active, .modal__button--next:active, .modal__button--close:active, .modal__button--prev:focus, .modal__button--next:focus, .modal__button--close:focus {
+    outline: 0; }
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10; }
+  .modal__content-wrapper {
+    max-width: 960px;
+    width: 80%;
+    height: 700px;
+    display: flex;
+    position: relative; }
+  .modal__image-wrapper {
+    width: 65%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+  .modal__image {
+    max-height: 100%;
+    max-width: 100%; }
+  .modal__info {
+    width: 35%;
+    height: 100%;
+    background: white; }
+  .modal__button--prev {
+    top: 45%;
+    left: 5%; }
+  .modal__button--next {
+    top: 45%;
+    left: 90%; }
+  .modal__button--close {
+    top: 6%;
+    left: 90%; }
+
+.pagination {
+  margin: 20px 0; }
+  .pagination__links-wrapper {
+    width: 30%;
+    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold; }
+  .pagination__link {
+    min-width: 24px;
+    min-height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none; }
+    .pagination__link:hover {
+      text-decoration: none; }
+
+/*# sourceMappingURL=app.css.map */

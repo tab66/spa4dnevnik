@@ -1,0 +1,242 @@
+$primary-color: #ececec;
+$primary-color-dark: #757575;
+$secondary-color: #d5eef9;
+$secondary-color-dark: #b5d0fa;
+$translucent-light: rgba(235,235,235,0.55);
+$translucent-dark: rgba(0,0,0,0.9);
+
+$primary-font: "Roboto", Arial, Helvetica, sans-serif;
+$icon-font: 'Material Icons';
+
+@mixin icon($top, $left, $fontSize: 16px){
+  position: absolute;
+  font-family: $icon-font;
+  top: $top;
+  left: $left;
+  font-size: $fontSize;
+  transform: translate(-50%, -50%);
+}
+
+body{
+  margin: 0;
+  font-family: $primary-font;
+}
+
+.container{
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.topbar{
+  width: 100%;
+  position: fixed;
+  top: 0;
+  padding: 10px 0;
+  background: #ececec;
+  z-index: 5;
+  .container{
+    display: flex;
+    justify-content: space-between;
+  }
+  &__logo-wrapper{
+    height: 38px;
+    display: flex;
+    align-items: center;
+  }
+  &__image-wrapper, &__image{
+    height: 100%;
+  }
+  &__image-wrapper{
+    margin-right: 15px;
+  }
+  &__logo-text{
+    font-size: 18px;
+    font-weight: 500;
+    color: #757575;
+  }
+  &__input-wrapper{
+    width: 440px;
+    position: relative;
+  }
+  &__input{
+    width: 100%;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    color: #757575;
+    padding: .5em;
+    border-radius: 2px;
+    border: 1px solid lightgray;
+    outline: none;
+  }
+  &__input-button{
+    position: absolute;
+    top: 5px;
+    right: -12px;
+    padding: 6px 15px;
+    background-color: #b5d0fa;
+    border: 0;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s all;
+    &:disabled{
+      background-color: #757575;
+    }
+    &:active, &:focus{
+      outline: 0;
+    }
+  }
+}
+
+.content{
+  margin-top: 68px;
+  &__wrapper{
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0 -15px;
+  }
+}
+
+%info-item{
+  position: relative;
+  padding-left: 20px;
+  &:before{
+    @include icon(50%, 0);
+  }
+}
+
+.photo-tumblr {
+  width: calc(2/10 * 100%);
+  height: 135px;
+  position: relative;
+  padding: 0 15px;
+  margin: 15px 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  &__info{
+    width: calc(100% - 30px);
+    height: 40px;
+    position: absolute;
+    bottom: 0;
+    background: $translucent-light;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  &__info-item{
+    &--likes{
+      @extend %info-item;
+      &:before{
+        content: '\E87E';
+      }
+    }
+    &--comments{
+      @extend %info-item;
+      &:before{
+        content: '\E0CB';
+      }
+    }
+  }
+}
+
+%modal-btn{
+  position: absolute;
+  color: white;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  .material-icons{
+    font-size: 50px;
+  }
+  &:active, &:focus{
+    outline: 0;
+  }
+}
+
+.modal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $translucent-dark;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  &__content-wrapper{
+    max-width: 960px;
+    width: 80%;
+    height: 700px;
+    display: flex;
+    position: relative;
+  }
+  &__image-wrapper{
+    width: 65%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__image{
+    max-height: 100%;
+    max-width: 100%;
+  }
+  &__info{
+    width: 35%;
+    height: 100%;
+    background: white;
+  }
+  &__button{
+    &--prev{
+      @extend %modal-btn;
+      top: 45%;
+      left: 5%;
+    }
+    &--next{
+      @extend %modal-btn;
+      top: 45%;
+      left: 90%;
+    }
+    &--close{
+      @extend %modal-btn;
+      top: 6%;
+      left: 90%;
+    }
+  }
+}
+
+.pagination{
+  margin: 20px 0;
+  &__links-wrapper{
+    width: 30%;
+    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  &__link{
+    min-width: 24px;
+    min-height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    &:hover{
+      text-decoration: none;
+    }
+  }
+}

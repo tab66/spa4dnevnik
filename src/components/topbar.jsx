@@ -33,7 +33,9 @@ class Topbar extends React.Component{
         const id = this.state.id;
         if(isNaN(id)){
             jsonp(`https://api.vk.com/method/users.get?user_ids=${id}`, function (data) {
-                this.getUserPhotos(data.response[0].uid);
+
+                data.error ? this.props.getPhotos([]) : this.getUserPhotos(data.response[0].uid);
+
             }.bind(this));
         } else {
             this.getUserPhotos(id);
@@ -62,32 +64,14 @@ class Topbar extends React.Component{
 
         jsonp(`https://api.vk.com/method/photos.get${filter}`, function (data) {
 
-            let photos = data.response,
-                protosArr = [];
-            if (photos.length <= 50) {
-                protosArr = photos;
-            } else {
-                let index = 0;
-                photos.reduce((prev, next) => {
-                    index = index + 1;
-                    prev.push(next);
-                    if (prev.length === 50) {
-                        protosArr.push(prev);
-                        prev = [];
-                    } else if (index === photos.length) {
-                        protosArr.push(prev);
-                    }
-                    return prev;
-                }, [])
-            }
-            this.props.getPhotos(protosArr);
+            this.props.getPhotos(data.response);
 
         }.bind(this));
     }
 
     render(){
         return (
-            <header className="topbar">
+            <div className="topbar">
                 <div className="container">
                     <div className="topbar__logo-wrapper">
                         <div className="topbar__image-wrapper">
@@ -102,7 +86,7 @@ class Topbar extends React.Component{
                         <button className="topbar__input-button" disabled={this.state.disableBtn} onClick={this.getUserId}>Показать</button>
                     </div>
                 </div>
-            </header>
+            </div>
         )
     }
 }

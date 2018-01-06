@@ -5,6 +5,8 @@ class Pagination extends React.Component {
     constructor(props){
         super();
         this.state = {
+            page: 1,
+            endPage: 0,
             pagRender: []
         }
         this.renderPagination = this.renderPagination.bind(this);
@@ -31,7 +33,7 @@ class Pagination extends React.Component {
         endPage = Number(endPage);
 
         if(page < 5 && endPage <= 7){
-            for(i; i < endPage; i++){
+            for(i; i <= endPage; i++){
                 pagRender.push(i);
             }
         } else if(page < 5){
@@ -55,7 +57,7 @@ class Pagination extends React.Component {
             pagRender.push({text: '...', page: page + 2});
             pagRender.push(endPage);
         }
-        this.setState({pagRender});
+        this.setState({page: page, endPage: endPage, pagRender});
     }
 
     toFirstPage(e){
@@ -78,7 +80,8 @@ class Pagination extends React.Component {
 
     toLastPage(e){
         e.preventDefault();
-        let page = this.state.allPages;
+        let page = this.state.endPage;
+        console.log(page);
         this.changePage(page);
     }
 
@@ -90,7 +93,6 @@ class Pagination extends React.Component {
 
     changePage(page){
         this.props.changePage(page);
-        this.setState({ page });
         this.renderPagination(page, this.props.allPages);
     }
 
@@ -98,13 +100,13 @@ class Pagination extends React.Component {
         return(
             <div className="pagination">
                 <div className="pagination__links-wrapper">
-                    <a onClick={this.toFirstPage} href="#" className="pagination__link"><i className="material-icons">first_page</i></a>
-                    <a onClick={this.toPrevPage} href="#" className="pagination__link"><i className="material-icons">chevron_left</i></a>
+                    <button onClick={this.toFirstPage} className="pagination__link" disabled={this.props.page === 1}><i className="material-icons">first_page</i></button>
+                    <button onClick={this.toPrevPage} className="pagination__link" disabled={this.props.page === 1}><i className="material-icons">chevron_left</i></button>
                     {this.state.pagRender.map((elem, index) =>{
-                        return <a key={index} id={elem.page || elem} onClick={this.newPage} href="#" className="pagination__link">{elem.text || elem}</a>
+                        return <a key={index} id={elem.page || elem} onClick={this.newPage} href="#" className={`pagination__link${this.state.page === Number(elem) ? ' pagination__link--active' : ''}`}>{elem.text || elem}</a>
                     })}
-                    <a onClick={this.toNextPage} href="#" className="pagination__link"><i className="material-icons">chevron_right</i></a>
-                    <a onClick={this.toLastPage} href="#" className="pagination__link"><i className="material-icons">last_page</i></a>
+                    <button onClick={this.toNextPage} className="pagination__link" disabled={this.props.page === this.props.allPages}><i className="material-icons">chevron_right</i></button>
+                    <button onClick={this.toLastPage} className="pagination__link" disabled={this.props.page === this.props.allPages}><i className="material-icons">last_page</i></button>
                 </div>
             </div>
         );

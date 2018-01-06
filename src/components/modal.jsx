@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import jsonp from './jsonp';
+
 class Modal extends React.Component{
 
     constructor(props){
@@ -45,8 +47,6 @@ class Modal extends React.Component{
     }
 
     handleKeyUp(e) {
-        console.log(this);
-        // console.log(e.key);
         if(e.key === 'ArrowRight'){
             this.nextPhoto();
         } else if(e.key === 'ArrowLeft') {
@@ -98,7 +98,9 @@ class Modal extends React.Component{
     }
 
     render(){
-        let data = this.state.data;
+        let data = this.state.data,
+            dateCreated = new Date(data.created * 1000).toString('dd-mm-YYYY');
+        console.log(dateCreated);
         return (
             <div className="modal" onClick={this.closeModal} onKeyDown={this.handleKeyDown}>
                 {this.state.index === 0 && this.state.page === 1 ? '' :
@@ -112,12 +114,16 @@ class Modal extends React.Component{
                     </div>
                     <div className="modal__info">
                         <div className="modal__info-top">
-                            <span className="modal__info-top-item--likes">{data.likes.count}</span>
-                            <span className="modal__info-top-item--comments">{data.comments.count}</span>
-                            <span className="modal__info-top-item--reposts">{data.reposts.count}</span>
+                            <div className="modal__info-date">
+                                <b>Дата создания:</b> {dateCreated}
+                            </div>
+                            <div className="modal__info-additional">
+                                <span className="modal__info-top-item--likes">{data.likes.count}</span>
+                                <span className="modal__info-top-item--comments">{data.comments.count}</span>
+                            </div>
                         </div>
                         <div className="modal__comments-wrapper">
-
+                            Для отображения комментариев войдите в систему.
                         </div>
                     </div>
                 </div>

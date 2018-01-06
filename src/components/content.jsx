@@ -36,7 +36,6 @@ class Content extends React.Component{
     }
 
     renderPhotos(arr, page){
-        console.log()
         let actualIndex = this.state.index - 1,
             render = arr[page - 1].map((elem, index) => {
                 return <PhotoTumblr key={index} data={elem} openModal={this.openModal} />

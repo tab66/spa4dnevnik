@@ -1,7 +1,8 @@
 $primary-color: #ececec;
 $primary-color-dark: #757575;
-$secondary-color: #d5eef9;
-$secondary-color-dark: #b5d0fa;
+$secondary-color: #99c1ff;
+$secondary-color-light: #d5eef9;
+$secondary-color-dark: #1e0ff1;
 $translucent-light: rgba(235,235,235,0.55);
 $translucent-dark: rgba(0,0,0,0.9);
 
@@ -15,6 +16,22 @@ $icon-font: 'Material Icons';
   left: $left;
   font-size: $fontSize;
   transform: translate(-50%, -50%);
+}
+
+%kill-btn{
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  &:active, &:focus{
+    outline: 0;
+  }
+}
+
+%kill-link{
+  text-decoration: none;
+  &:hover{
+    text-decoration: none;
+  }
 }
 
 body{
@@ -34,6 +51,10 @@ body{
   top: 0;
   padding: 10px 0;
   background: #ececec;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.55);
+  -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.55);
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.55);
   z-index: 5;
   .container{
     display: flex;
@@ -53,7 +74,7 @@ body{
   &__logo-text{
     font-size: 18px;
     font-weight: 500;
-    color: #757575;
+    color: $primary-color-dark;
   }
   &__input-wrapper{
     width: 440px;
@@ -63,18 +84,19 @@ body{
     width: 100%;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
     font-size: 1rem;
-    color: #757575;
+    color: $primary-color-dark;
     padding: .5em;
     border-radius: 2px;
     border: 1px solid lightgray;
     outline: none;
+    box-sizing: border-box;
   }
   &__input-button{
     position: absolute;
     top: 5px;
-    right: -12px;
+    right: 7px;
     padding: 6px 15px;
-    background-color: #b5d0fa;
+    background-color: $secondary-color;
     border: 0;
     color: white;
     text-transform: uppercase;
@@ -82,7 +104,7 @@ body{
     cursor: pointer;
     transition: 0.3s all;
     &:disabled{
-      background-color: #757575;
+      background-color: $primary-color-dark;
     }
     &:active, &:focus{
       outline: 0;
@@ -91,7 +113,7 @@ body{
 }
 
 .content{
-  margin-top: 68px;
+  margin-top: 15px;
   &__wrapper{
     min-height: 100vh;
     display: flex;
@@ -112,23 +134,37 @@ body{
 
 .photo-tumblr {
   width: calc(2/10 * 100%);
-  height: 135px;
   position: relative;
   padding: 0 15px;
   margin: 15px 0;
   box-sizing: border-box;
-  cursor: pointer;
+  &__body-wrapper{
+    width: 100%;
+    padding: 8px 8px 0;
+    transition: 0.3s all;
+    cursor: pointer;
+    box-sizing: border-box;
+    -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.35);
+    -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.35);
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.35);
+    &:hover{
+      -webkit-box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.35);
+      -moz-box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.35);
+      box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.35);
+    }
+  }
+  &__image-wrapper{
+    width: 100%;
+    height: 135px;
+  }
   img{
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
   &__info{
-    width: calc(100% - 30px);
+    width: 100%;
     height: 40px;
-    position: absolute;
-    bottom: 0;
-    background: $translucent-light;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -220,7 +256,7 @@ body{
 .pagination{
   margin: 20px 0;
   &__links-wrapper{
-    width: 30%;
+    width: 40%;
     margin-left: auto;
     display: flex;
     justify-content: space-between;
@@ -229,14 +265,85 @@ body{
     font-weight: bold;
   }
   &__link{
+    @extend %kill-btn;
     min-width: 24px;
     min-height: 24px;
+    margin: 0 5px;
     display: flex;
-    justify-content: center;
-    align-items: center;
     text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s all;
+    color: $secondary-color-dark;
     &:hover{
       text-decoration: none;
+      background-color: $secondary-color-light;
+      color: $secondary-color-dark;
+    }
+    &:disabled{
+      color: $primary-color-dark;
+      &:hover{
+        color: $primary-color-dark;
+        background-color: transparent;
+        cursor: default;
+      }
+    }
+    &--active{
+      background-color: $secondary-color-light;
+      color: $secondary-color-dark;
+      &:hover{
+        cursor: default;
+      }
+    }
+  }
+}
+
+.lowbar{
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.3s all;
+  &--error, &--sort{
+    max-height: 40px;
+    margin-top: 62px;
+    font-size: 14px;
+    padding: 10px 0;
+    color: #000;
+  }
+  &--error{
+    background: red;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+  }
+  &--sort{
+    background: $translucent-light;
+  }
+  &__sort-wrapper{
+    display: flex;
+    justify-content: space-between;
+  }
+  &__filters-wrapper{
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__filter{
+    @extend %kill-btn;
+    color: $secondary-color-dark;
+    transition: 0.3s all;
+    &:hover{
+      color: $secondary-color;
+    }
+    &--sort-up, &--sort-down{
+      font-weight: bold;
+      position: relative;
+      &:before{
+        content: '\E164';
+        @include icon(50%, 120%);
+      }
+    }
+    &--sort-down:before{
+      transform: translate(-50%, -50%) rotate(180deg);
     }
   }
 }

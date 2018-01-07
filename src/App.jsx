@@ -73,7 +73,7 @@ class App extends React.Component{
         let protosArr = [];
 
         if (photos.length <= 50) {
-            protosArr = photos;
+            protosArr[0] = photos;
         } else {
             let index = 0;
             photos.reduce((prev, next) => {

@@ -5,6 +5,17 @@
   .pagination__link:active, .lowbar__filter:active, .pagination__link:focus, .lowbar__filter:focus {
     outline: 0; }
 
+.photo-tumblr__info-item--likes, .photo-tumblr__info-item--comments, .modal__info-top-item--date, .modal__info-top-item--likes, .modal__info-top-item--comments {
+  position: relative;
+  padding-left: 20px; }
+  .photo-tumblr__info-item--likes:before, .photo-tumblr__info-item--comments:before, .modal__info-top-item--date:before, .modal__info-top-item--likes:before, .modal__info-top-item--comments:before {
+    position: absolute;
+    font-family: "Material Icons";
+    top: 50%;
+    left: 0;
+    font-size: 16px;
+    transform: translate(-50%, -50%); }
+
 body {
   margin: 0;
   font-family: "Roboto", Arial, Helvetica, sans-serif; }
@@ -79,17 +90,6 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0 -15px; }
-
-.photo-tumblr__info-item--likes, .photo-tumblr__info-item--comments {
-  position: relative;
-  padding-left: 20px; }
-  .photo-tumblr__info-item--likes:before, .photo-tumblr__info-item--comments:before {
-    position: absolute;
-    font-family: "Material Icons";
-    top: 50%;
-    left: 0;
-    font-size: 16px;
-    transform: translate(-50%, -50%); }
 
 .photo-tumblr {
   width: calc(2/10 * 100%);
@@ -170,6 +170,26 @@ body {
     width: 35%;
     height: 100%;
     background: white; }
+  .modal__info-top {
+    padding: 15px;
+    border-bottom: 1px solid #ececec; }
+  .modal__info-additional {
+    margin-top: 9px; }
+  .modal__info-top b {
+    display: block;
+    margin-bottom: 9px; }
+  .modal__info-top-item--date {
+    margin: 0 25px 0 7px; }
+    .modal__info-top-item--date:before {
+      content: '\E8DF'; }
+  .modal__info-top-item--likes {
+    margin-right: 25px; }
+    .modal__info-top-item--likes:before {
+      content: '\E87E'; }
+  .modal__info-top-item--comments:before {
+    content: '\E0CB'; }
+  .modal__comments-wrapper {
+    padding: 15px; }
   .modal__button--prev {
     top: 45%;
     left: 5%; }
@@ -239,12 +259,15 @@ body {
   .lowbar__filters-wrapper {
     width: 40%;
     display: flex;
-    justify-content: space-between; }
+    justify-content: space-between;
+    align-items: center; }
   .lowbar__filter {
     color: #1e0ff1;
     transition: 0.3s all; }
     .lowbar__filter:hover {
       color: #99c1ff; }
+    .lowbar__filter:before {
+      transition: 0.3s all; }
     .lowbar__filter--sort-up, .lowbar__filter--sort-down {
       font-weight: bold;
       position: relative; }
@@ -257,6 +280,6 @@ body {
         font-size: 16px;
         transform: translate(-50%, -50%); }
     .lowbar__filter--sort-down:before {
-      transform: translate(-50%, -50%) rotate(180deg); }
+      transform: translate(-50%, -50%) rotate(-180deg); }
 
 /*# sourceMappingURL=app.css.map */

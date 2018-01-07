@@ -32,7 +32,7 @@ class Pagination extends React.Component {
         page = Number(page);
         endPage = Number(endPage);
 
-        if(page < 5 && endPage <= 7){
+        if(page <= 7 && endPage <= 7){
             for(i; i <= endPage; i++){
                 pagRender.push(i);
             }

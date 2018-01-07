@@ -15,6 +15,9 @@ class App extends React.Component{
             modal: ''
         }
         this.getPhotos = this.getPhotos.bind(this);
+        this.sortIt = this.sortIt.bind(this);
+        this.sortData = this.sortData.bind(this);
+        this.reverseSort = this.reverseSort.bind(this);
         this.dataToPages = this.dataToPages.bind(this);
         this.modalAction = this.modalAction.bind(this);
     }
@@ -28,20 +31,41 @@ class App extends React.Component{
         }
     }
 
-    sortByDate(){
-        this.dataToPages(arr);
+    sortIt(id){
+        switch(id){
+            case 'date':
+                this.sortData('created');
+                break;
+            case 'likes':
+                this.sortData('likes', 'count');
+                break;
+            case 'comments':
+                this.sortData('comments', 'count');
+                break;
+            case 'reverse':
+                this.reverseSort();
+                break;
+        }
     }
 
-    sortByLikes(){
-        this.dataToPages(arr);
-    }
+    sortData(id, secondId){
+        let oldData = this.state.data,
+            data = '';
 
-    sortByComments(){
-        this.dataToPages(arr);
+        secondId ?
+            data = oldData.sort((a, b) => a[id][secondId] > b[id][secondId] ? -1 :
+                                          a[id][secondId] < b[id][secondId] ? 1 : 0) :
+            data = oldData.sort((a, b) => a[id] > b[id] ? -1 :
+                                          a[id] < b[id] ? 1 : 0);
+
+        this.setState({ data });
+        this.dataToPages(data);
     }
 
     reverseSort(){
-
+        let oldData = this.state.data,
+            data = oldData.reverse();
+        this.dataToPages(data);
     }
 
     dataToPages(photos){
@@ -81,7 +105,7 @@ class App extends React.Component{
     render(){
         return (
             <div className="app-wrapper">
-                <Header getPhotos={this.getPhotos} />
+                <Header getPhotos={this.getPhotos} sortIt={this.sortIt} />
                 <Content data={this.state.photos} openModal={this.modalAction}  />
                 {this.state.modal}
             </div>

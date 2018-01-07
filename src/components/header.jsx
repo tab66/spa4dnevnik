@@ -13,6 +13,7 @@ class Header extends React.Component{
             showSort: false
         }
         this.getPhotos = this.getPhotos.bind(this);
+        this.sortIt = this.sortIt.bind(this);
     }
 
     getPhotos(arr){
@@ -31,11 +32,15 @@ class Header extends React.Component{
         }
     }
 
+    sortIt(id){
+        this.props.sortIt(id);
+    }
+
     render(){
         return (
             <header>
                 <Topbar getPhotos={this.getPhotos} />
-                <Lowbar error={this.state.error} showSort={this.state.showSort} />
+                <Lowbar error={this.state.error} showSort={this.state.showSort} sortIt={this.sortIt} />
             </header>
         )
     }

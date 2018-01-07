@@ -99,8 +99,7 @@ class Modal extends React.Component{
 
     render(){
         let data = this.state.data,
-            dateCreated = new Date(data.created * 1000).toString('dd-mm-YYYY');
-        console.log(dateCreated);
+            dateCreated = new Date(data.created * 1000).toISOString().substr(0, 10).split('-').reverse().join('.');
         return (
             <div className="modal" onClick={this.closeModal} onKeyDown={this.handleKeyDown}>
                 {this.state.index === 0 && this.state.page === 1 ? '' :
@@ -114,13 +113,10 @@ class Modal extends React.Component{
                     </div>
                     <div className="modal__info">
                         <div className="modal__info-top">
-                            <div className="modal__info-date">
-                                <b>Дата создания:</b> {dateCreated}
-                            </div>
-                            <div className="modal__info-additional">
-                                <span className="modal__info-top-item--likes">{data.likes.count}</span>
-                                <span className="modal__info-top-item--comments">{data.comments.count}</span>
-                            </div>
+                            <b>Общая информация о фотографии:</b>
+                            <span className="modal__info-top-item--date">{dateCreated}</span>
+                            <span className="modal__info-top-item--likes">{data.likes.count}</span>
+                            <span className="modal__info-top-item--comments">{data.comments.count}</span>
                         </div>
                         <div className="modal__comments-wrapper">
                             Для отображения комментариев войдите в систему.

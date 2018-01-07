@@ -34,6 +34,14 @@ $icon-font: 'Material Icons';
   }
 }
 
+%info-item{
+  position: relative;
+  padding-left: 20px;
+  &:before{
+    @include icon(50%, 0);
+  }
+}
+
 body{
   margin: 0;
   font-family: $primary-font;
@@ -121,14 +129,6 @@ body{
     justify-content: center;
     align-items: center;
     margin: 0 -15px;
-  }
-}
-
-%info-item{
-  position: relative;
-  padding-left: 20px;
-  &:before{
-    @include icon(50%, 0);
   }
 }
 
@@ -234,6 +234,44 @@ body{
     height: 100%;
     background: white;
   }
+  &__info-top{
+    padding: 15px;
+    border-bottom: 1px solid $primary-color;
+  }
+  &__info-additional{
+    margin-top: 9px;
+  }
+  &__info-top{
+    b{
+      display: block;
+      margin-bottom: 9px;
+    }
+  }
+  &__info-top-item{
+    &--date{
+      @extend %info-item;
+      margin: 0 25px 0 7px;
+      &:before{
+        content: '\E8DF';
+      }
+    }
+    &--likes{
+      @extend %info-item;
+      margin-right: 25px;
+      &:before{
+        content: '\E87E';
+      }
+    }
+    &--comments{
+      @extend %info-item;
+      &:before{
+        content: '\E0CB';
+      }
+    }
+  }
+  &__comments-wrapper{
+    padding: 15px;
+  }
   &__button{
     &--prev{
       @extend %modal-btn;
@@ -326,6 +364,7 @@ body{
     width: 40%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
   &__filter{
     @extend %kill-btn;
@@ -333,6 +372,9 @@ body{
     transition: 0.3s all;
     &:hover{
       color: $secondary-color;
+    }
+    &:before{
+      transition: 0.3s all;
     }
     &--sort-up, &--sort-down{
       font-weight: bold;
@@ -343,7 +385,7 @@ body{
       }
     }
     &--sort-down:before{
-      transform: translate(-50%, -50%) rotate(180deg);
+      transform: translate(-50%, -50%) rotate(-180deg);
     }
   }
 }

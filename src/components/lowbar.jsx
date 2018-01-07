@@ -8,9 +8,10 @@ class Lowbar extends React.Component{
         this.state = {
             error: '',
             showSort: false,
-            filter: 'date'
+            filter: 'date',
+            filterReverse: false
         }
-        // this.getPhotos = this.getPhotos.bind(this);
+        this.sortIt = this.sortIt.bind(this);
     }
 
     componentWillReceiveProps(props){
@@ -29,11 +30,29 @@ class Lowbar extends React.Component{
     }
 
     shouldComponentUpdate(prev, next){
-        return next.showSort !== this.state.showSort;
+        return next.error !== this.state.error ||
+               next.showSort !== this.state.showSort ||
+               next.filter !== this.state.filter ||
+               next.filterReverse !== this.state.filterReverse;
+    }
+
+    sortIt(e){
+        let id = e.target.id;
+        if(this.state.filter === id){
+            this.props.sortIt('reverse');
+            this.setState({filterReverse: !this.state.filterReverse});
+        } else {
+            this.props.sortIt(id);
+            this.setState({
+                filter: id,
+                filterReverse: false
+            });
+        }
+
     }
 
     render(){
-        console.log('bang!');
+        console.log()
         return (
             <div className={`lowbar${this.state.error ?
                 ' lowbar--error' : this.state.showSort ?
@@ -45,19 +64,25 @@ class Lowbar extends React.Component{
                         <div className="lowbar__sort-wrapper">
                             <b>Выберите фильтр</b>
                             <div className="lowbar__filters-wrapper">
-                                <button id="date" className={`lowbar__filter${
-                                    this.state.filter === 'date' ?
-                                    ' lowbar__filter--sort-up' : ''}`}>
+                                <button id="date" onClick={this.sortIt}
+                                        className={`lowbar__filter${
+                                        this.state.filter === 'date' && this.state.filterReverse ?
+                                        ' lowbar__filter--sort-down' : this.state.filter === 'date' ?
+                                        ' lowbar__filter--sort-up' : ''}`}>
                                     по дате
                                 </button>
-                                <button id="likes" className={`lowbar__filter${
-                                    this.state.filter === 'likes' ?
-                                    ' lowbar__filter--sort-up' : ''}`}>
+                                <button id="likes" onClick={this.sortIt}
+                                        className={`lowbar__filter${
+                                            this.state.filter === 'likes' && this.state.filterReverse ?
+                                            ' lowbar__filter--sort-down' : this.state.filter === 'likes' ?
+                                            ' lowbar__filter--sort-up' : ''}`}>
                                     по лайкам
                                 </button>
-                                <button id="comments" className={`lowbar__filter${
-                                    this.state.filter === 'comments' ?
-                                    ' lowbar__filter--sort-up' : ''}`}>
+                                <button id="comments" onClick={this.sortIt}
+                                        className={`lowbar__filter${
+                                            this.state.filter === 'comments' && this.state.filterReverse ?
+                                            ' lowbar__filter--sort-down' : this.state.filter === 'comments' ?
+                                            ' lowbar__filter--sort-up' : ''}`}>
                                     по комментариям
                                 </button>
                             </div>

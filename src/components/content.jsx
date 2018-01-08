@@ -29,7 +29,7 @@ class Content extends React.Component{
     componentWillReceiveProps(props){
         if(props.data.length > 0){
             this.renderPhotos(props.data, 1);
-            this.setState({data: props.data})
+            this.setState({data: props.data, page: 1});
         } else {
             this.setState({render: 'Пользователь не выбран'});
         }

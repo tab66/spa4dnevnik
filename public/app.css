@@ -165,7 +165,8 @@ body {
     align-items: center; }
   .modal__image {
     max-height: 100%;
-    max-width: 100%; }
+    max-width: 100%;
+    cursor: pointer; }
   .modal__info {
     width: 35%;
     height: 100%;

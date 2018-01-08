@@ -25,6 +25,13 @@ class Pagination extends React.Component {
         this.renderPagination(page, endPage);
     }
 
+    componentWillReceiveProps(props){
+        let page = props.page,
+            endPage = props.allPages;
+
+        this.renderPagination(page, endPage);
+    }
+
     renderPagination(page, endPage) {
         let i = 1,
             pagRender = [];

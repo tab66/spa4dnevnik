@@ -109,7 +109,11 @@ class Modal extends React.Component{
                 }
                 <div className="modal__content-wrapper">
                     <div className="modal__image-wrapper">
-                        <img className="modal__image" src={data.src_xxbig || data.src_xbig || data.src_big} alt=""/>
+                        <img className="modal__image"
+                             src={data.src_xxbig || data.src_xbig || data.src_big}
+                             alt=""
+                             onClick={this.nextPhoto}
+                        />
                     </div>
                     <div className="modal__info">
                         <div className="modal__info-top">
